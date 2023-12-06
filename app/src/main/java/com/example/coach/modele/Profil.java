@@ -3,12 +3,19 @@ package com.example.coach.modele;
 import static java.lang.Math.pow;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Profil implements Serializable {
     private Integer sexe;
     private Integer poids;
     private Integer taille;
     private Integer age;
+
+    public Date getDateMesure() {
+        return dateMesure;
+    }
+
+    private Date dateMesure;
 
     private float img = 0;
     private String message = "";
@@ -19,11 +26,12 @@ public class Profil implements Serializable {
     private static final Integer minHomme = 10; // maigre si en dessous
     private static final Integer maxHomme = 25; // gros si au dessus
 
-    public Profil(Integer poids, Integer taille, Integer age, Integer sexe) {
+    public Profil(Integer poids, Integer taille, Integer age, Integer sexe, Date dateMesure) {
         this.sexe = sexe;
         this.poids = poids;
         this.taille = taille;
         this.age = age;
+        this.dateMesure = dateMesure;
     }
 
     public Integer getSexe() {
@@ -72,6 +80,7 @@ public class Profil implements Serializable {
         }
         return message;
     }
+
 
 
 }
