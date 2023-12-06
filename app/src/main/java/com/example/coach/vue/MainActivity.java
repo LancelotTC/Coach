@@ -3,7 +3,6 @@ package com.example.coach.vue;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText txtAge;
 
     private RadioButton rdHomme;
+    private RadioButton rdFemme;
     private TextView lblIMG;
     private ImageView imgSmiley;
     private Button btnCalc;
@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void affichResult(Integer poids, Integer taille, Integer age, Integer sexe) {
-        controle.creerProfil(poids, taille, age, sexe);
+        controle.creerProfil(poids, taille, age, sexe, this);
         float img = controle.getImg();
         String message = controle.getMessage();
 
@@ -90,14 +90,33 @@ public class MainActivity extends AppCompatActivity {
         txtAge = (EditText) findViewById(R.id.txtAge);
 
         rdHomme = (RadioButton) findViewById(R.id.rdHomme);
+        rdFemme = (RadioButton) findViewById(R.id.rdFemme);
 
         lblIMG = (TextView) findViewById(R.id.lblIMG);
 
         imgSmiley = (ImageView) findViewById(R.id.imgSmiley);
 
         btnCalc = (Button) findViewById(R.id.btnCalc);
-        controle = Controle.getInstance();
+        controle = Controle.getInstance(this);
         ecouteCalcul();
+        recupProfil();
+    }
+
+    public void recupProfil() {
+        if (controle.getPoids() == null) {
+            return;
+        }
+
+        txtPoids.setText(""+controle.getPoids());
+        txtTaille.setText(""+controle.getTaille());
+        txtAge.setText(""+controle.getAge());
+        if (controle.getSexe() == 1) {
+            rdHomme.setChecked(true);
+        } else {
+            rdFemme.setChecked(true);
+        }
+
+        btnCalc.performClick();
     }
 
 }

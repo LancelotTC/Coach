@@ -2,7 +2,9 @@ package com.example.coach.modele;
 
 import static java.lang.Math.pow;
 
-public class Profil {
+import java.io.Serializable;
+
+public class Profil implements Serializable {
     private Integer sexe;
     private Integer poids;
     private Integer taille;
